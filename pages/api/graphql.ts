@@ -44,7 +44,8 @@ const resolverCrud = {
     users: () => users,
   },
   Mutation: {
-    createUser: (_: any, { name }: User) => {
+    createUser: (_: any, { name }: User, { auth }: any) => {
+      console.log({ auth });
       const user = {
         id: users.length + 1,
         name,
@@ -73,6 +74,10 @@ const apolloServer = new ApolloServer({
   typeDefs: [typesHello, typesCrudUsers],
   resolvers: [resolversHello, resolverCrud],
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground],
+  context: ({ req }: { req: NextApiRequest }) => {
+    const auth = req.headers.authorization || "";
+    return { auth };
+  },
 });
 
 const startServer = apolloServer.start();

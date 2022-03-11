@@ -1,0 +1,29 @@
+# # Write your query or mutation here
+query helloPeople($name: String){
+  hello2(name: $name)
+}
+
+query helloo {
+  hello
+}
+
+query getUsers {
+   users {
+    id
+    name
+  }
+}
+
+mutation insertUser($name: String) {
+  createUser(name: $name) {
+    id
+    name
+  }
+}
+
+mutation deleteUser($id: Int) {
+  deleteUser(id:$id) {
+    id
+    name
+  }
+}
